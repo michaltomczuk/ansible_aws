@@ -1,0 +1,13 @@
+- name: EC2 - custom script
+  hosts: "tag_Name_NewInstance"
+  serial: 2
+  tasks:
+    - name: Save file
+      sudo: yes
+      shell: curl http://169.254.169.254/latest/meta-data/ami-id >> /var/log/test_ansbile.txt
+    - name: Save info about
+      sudo: yes
+      shell: curl http://169.254.169.254/latest/meta-data/public-hostname
+      register: myhostname
+    - name: Ping to external service
+      shell: curl --header "MyHeader:""{{myhostname.stdout_lines[0]}}" http://requestb.in/19nx29z1
