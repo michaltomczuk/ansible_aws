@@ -17,5 +17,4 @@ out/
 work/
 logs.txt
 target
-.idea/*
-!.idea/runConfigurations
+.idea

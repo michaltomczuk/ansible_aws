@@ -9,14 +9,14 @@
       register: rec
     - debug: msg="Value is {{ rec.set.value }}"
 
-# - name: Route 53 info
-#   hosts: 127.0.0.1
-#   tasks:
-#     - route53:
-#         command=create
-#         zone=muulov.com
-#         record=testmd123.muulov.com
-#         type=SRV
-#         ttl=60
-#         value="{{ rec.set.value }},1 10 1130 michaldec123.info"
-#         overwrite=true
+- name: Route 53 info
+  hosts: 127.0.0.1
+  tasks:
+    - route53:
+         command=create
+         zone=michaldec.info
+         record=test.michaldec.info
+         type=CNAME
+         ttl=60
+         value="example123.com"
+         overwrite=true
