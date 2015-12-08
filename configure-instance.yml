@@ -3,3 +3,4 @@
   vars_files: ["region-config/us-east-1.yml"]
   roles:
     - new-instance
+    - restart-docker
