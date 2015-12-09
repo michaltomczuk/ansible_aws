@@ -1,1 +1,1 @@
-ansible_ssh_private_key_file: ~/.ssh/keys/michal_private.pem
+ansible_ssh_private_key_file:

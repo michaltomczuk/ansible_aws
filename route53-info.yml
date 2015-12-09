@@ -3,8 +3,8 @@
   tasks:
     - route53:
         command=get
-        zone=michaldec.info
-        record=test.michaldec.info
+        zone=
+        record=
         type=CNAME
       register: rec
     - debug: msg="Value is {{ rec.set.value }}"
@@ -14,9 +14,9 @@
   tasks:
     - route53:
          command=create
-         zone=michaldec.info
-         record=test.michaldec.info
+         zone=
+         record=
          type=CNAME
          ttl=60
-         value="example123.com"
+         value="example555.com"
          overwrite=true

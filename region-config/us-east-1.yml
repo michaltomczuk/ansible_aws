@@ -1,5 +1,5 @@
-aws_region: us-east-1
-aws_ami_id: ami-920f77f8
-aws_vpc_id: vpc-0ad2546f
-aws_vpc_subnet_id: subnet-c09733b7
-aws_key_pair: michal_private
+aws_region:
+aws_ami_id:
+aws_vpc_id:
+aws_vpc_subnet_id:
+aws_key_pair:
