@@ -3,14 +3,12 @@
   apt: name=git state=present
 
 - name: creating known_hosts
-  file: path=/home/{{ provisioning_user }}/.ssh/known_hosts 
+  file: path=~/.ssh/known_hosts 
         state=touch 
-        owner={{ provisioning_user }} 
-        group={{ provisioning_user }} 
         mode=0644
 
 - name: Add GitHub key
-  shell: ssh-keyscan github.com >> /home/{{ provisioning_user }}/.ssh/known_hosts
+  shell: ssh-keyscan github.com >> ~/.ssh/known_hosts
 
 - name: Add bitbuckets key
-  shell: ssh-keyscan bitbucket.org >> /home/{{ provisioning_user }}/.ssh/known_hosts
+  shell: ssh-keyscan bitbucket.org >> ~/.ssh/known_hosts
