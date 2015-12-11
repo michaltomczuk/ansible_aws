@@ -1,0 +1,30 @@
+---
+- name: create vpc 
+  ec2_vpc:
+    state: present
+    cidr_block: 10.0.0.0/16
+    resource_tags: { "Environment":"Staging" }
+    region: "{{aws_region}}"
+    dns_hostnames: no
+    dns_support: yes
+    instance_tenancy: default
+    subnets:
+      - cidr: 10.0.0.0/24
+        az: "{{aws_region}}b"
+        resource_tags: { "Environment":"Stage", "Tier" : "CCF" }
+      - cidr: 10.0.1.0/24
+        az: "{{aws_region}}c"
+        resource_tags: { "Environment":"Stage", "Tier" : "DB" }
+    internet_gateway: True
+    route_tables:
+      - subnets:
+          - 10.0.1.0/24
+        routes:
+          - dest: 0.0.0.0/0
+            gw: igw
+      - subnets:
+          - 10.0.0.0/24
+        routes:
+          - dest: 0.0.0.0/0
+            gw: igw
+  register: vpc
