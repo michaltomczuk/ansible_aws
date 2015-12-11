@@ -1,0 +1,5 @@
+---
+- name: Copy 90-graylog2.conf config file to /etc/rsyslog.d/
+  template: src=90-graylog2.conf.j2 dest=/etc/rsyslog.d/90-graylog2.conf owner=root group=root mode=0644
+  notify:
+    - Restart rsyslog

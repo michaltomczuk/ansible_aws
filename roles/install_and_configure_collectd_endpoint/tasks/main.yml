@@ -1,0 +1,11 @@
+---
+- name: install collectd
+  apt: name={{ item }} state=present
+  with_items:
+    - collectd
+    - collectd-utils
+
+- name: Copy collectd.conf config file to /etc/collectd
+  template: src=collectd.conf.j2 dest=/etc/collectd/collectd.conf owner=root group=root mode=0644
+  notify:
+    - Restart collectd
