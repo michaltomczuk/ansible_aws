@@ -1,14 +1,19 @@
 ---
+- name: check if SWAP file exists
+  stat: path=/swapfile  
+  register: swap_exist
+
 - name: creating SWAP file
   command: dd if=/dev/zero of=/swapfile bs=1024 count=1024k
-  when:
-    - file: /swapfile state=absent
-  
+  when: swap_exist.stat.exists == False    
+ 
 - name: preparing SWAP area
   command: mkswap /swapfile  
+  when: swap_exist.stat.exists == False
 
 - name: activate SWAP
   command: swapon /swapfile
+  when: swap_exist.stat.exists == False
 
 - name: add entry to /etc/fstab
   mount: name=none src=/swapfile fstype=swap opts=sw state=present
