@@ -1,0 +1,21 @@
+---
+# Add values to /etc/sysctl.conf
+- name: add values to /etc/sysctl.conf
+  lineinfile: 
+    dest=/etc/sysctl.conf 
+    line="{{ item.line }}"
+  with_items:
+    - { line: 'net.ipv6.conf.all.disable_ipv6 = 1'}
+    - { line: 'net.ipv6.conf.default.disable_ipv6 = 1'}
+    - { line: 'net.ipv6.conf.lo.disable_ipv6 = 1'}
+    - { line: 'vm.panic_on_oom=1'}
+    - { line: 'kernel.panic=10'}
+    - { line: 'net.ipv4.ip_local_port_range = 1024 65000'}
+    - { line: 'net.ipv4.tcp_rmem = 4096 87380 8388608'}
+    - { line: 'net.ipv4.tcp_fin_timeout = 30'}
+    - { line: 'net.ipv4.tcp_keepalive_time = 30'}
+    - { line: 'net.ipv4.tcp_tw_recycle = 1'}
+    - { line: 'net.ipv4.tcp_tw_reuse = 1'}
+    - { line: 'fs.file-max = 70000'}
+  notify:
+    - Reload sysctl

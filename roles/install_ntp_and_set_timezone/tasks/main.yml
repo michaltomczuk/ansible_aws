@@ -1,0 +1,16 @@
+---
+- name: install ntp
+  apt: name=ntp state=present
+
+- name: make sure that ntp process is running
+  service: name=ntp state=started
+
+- name: set timezone
+  copy: content='Europe/Warsaw'
+        dest=/etc/timezone
+        owner=root
+        group=root
+        mode=0644
+        backup=yes
+  notify:
+    - update timezone

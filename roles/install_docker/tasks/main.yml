@@ -1,0 +1,29 @@
+---
+- name: add docker repo key
+  apt_key: >
+    keyserver=hkp://pgp.mit.edu:80
+    id=58118E89F3A912897C070ADBF76221572C52609D
+
+- name: add docker apt repository
+  apt_repository: >
+    repo="deb https://apt.dockerproject.org/repo ubuntu-precise main"
+    state=present
+    update_cache=yes
+
+- name: install docker
+  apt: pkg=docker-engine state=latest
+
+- name: configure docker
+  copy: content='DOCKER_OPTS=""'
+    dest=/etc/default/docker
+  notify: restart docker
+
+- name: allow provisioning user to run docker commands without sudo
+  user: name={{ provisioning_user }} append=yes groups=docker
+
+- name: install required python packages for ansible and docker
+  apt: pkg={{item}} state=latest
+  with_items: [python-pip, python-dev]
+
+- name: install the version of docker-py used by ansible
+  pip: name=docker-py version=1.1.0

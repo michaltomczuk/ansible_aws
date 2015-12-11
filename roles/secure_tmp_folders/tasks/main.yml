@@ -1,0 +1,32 @@
+---
+# Add noexec, nosuid flags to /tmp and /var/tmp 
+- name: secure /TMP and /VAR/TMP
+  command: dd if=/dev/zero of=/tmpdsk bs=1024 count=1024000
+  ignore_errors: True
+  
+- name: move old TMP
+  command: mv /tmp /tmp_old
+  
+- name: create TMP mount point
+  file: path=/tmp state=directory mode=1777
+  
+- name: add entry to /etc/fstab
+  mount: name=/tmp src=/tmpdsk fstype=tmpfs opts=loop,noexec,nosuid,rw state=present
+  
+- name: copy * from tmp_old to new tmp
+  command: cp -Rpf /tmp_old /tmp
+  
+- name: remove old tmp folder
+  command: rm -rf /tmp_old
+  
+- name: move /var/tmp to /var/tmp_old
+  command: mv /var/tmp /var/tmp_old
+  
+- name: create link from /var/tmp to /tmp
+  command: ln -s /tmp /var/tmp
+  
+- name: copy * from /var/tmp_old to /var/tmp
+  command: cp -Rpf /var/tmp_old /var/tmp
+  
+- name: remove /var/tmp_old
+  command: rm -rf /var/tmp_old

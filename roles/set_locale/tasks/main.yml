@@ -1,0 +1,9 @@
+---
+- name: generate locales
+  shell: locale-gen en_US en_US.UTF-8
+
+- name: reconfigure locales
+  shell: dpkg-reconfigure locales
+
+- name: add locales to /etc/environment
+  shell: echo 'LC_ALL=en_US.UTF-8\nLANG=en_US.UTF-8' >> /etc/environment

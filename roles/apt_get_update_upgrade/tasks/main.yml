@@ -1,0 +1,6 @@
+---
+- name: update packages list
+  apt: update_cache=yes
+
+- name: upgrade all packages
+  apt: upgrade=full

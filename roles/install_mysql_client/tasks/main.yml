@@ -1,0 +1,7 @@
+---
+- name: install mysql-client
+  apt: name=mysql-client-5.6 state=present
+
+- name: install python mysql module
+  apt: name=python-mysqldb state=present
+

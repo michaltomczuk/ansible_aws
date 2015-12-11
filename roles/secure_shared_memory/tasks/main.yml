@@ -1,0 +1,4 @@
+---
+# Secure shared memory
+- name: secure shared memory by mounting with right flags
+  mount: name=/run/shm src=tmpfs fstype=tmpfs opts=defaults,noexec,nosuid state=present

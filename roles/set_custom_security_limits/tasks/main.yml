@@ -1,0 +1,8 @@
+---
+- name: add values to /etc/security/limits.conf
+  lineinfile: 
+    dest=/etc/security/limits.conf
+    line="{{ item.line }}"
+  with_items:
+    - { line: '*  soft  nofile 30000'}
+    - { line: '*  hard  nofile 30000'}

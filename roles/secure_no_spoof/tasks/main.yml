@@ -1,0 +1,4 @@
+---
+# No spoof
+- name: add nospoof to /etc/host.conf
+  lineinfile: dest=/etc/host.conf line="nospoof on"
